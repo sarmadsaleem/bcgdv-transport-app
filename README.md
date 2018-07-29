@@ -1,17 +1,17 @@
-# Problem
+## Problem
 
 In the fictional city of Verspaetung, public transport is notoriously unreliable. To tackle the problem, the city council has decided to make the public transport timetables and delay information public, opening up opportunities for innovative use cases.
 You are given the task to make use of that information and write an API that offers information on the public transport system of Verspaetung.
 As a side note, the city of Verspaetung has been built on a strict grid, so all location information can be assumed to be from a cartesian coordinate system.
 
-# Data
+## Data
 
 - Four csv files with timetable information of the public transport system
   - `lines.csv` which lists a public transport line with its id and a name
   - `stops.csv` which lists stops with an id and their coordinates
   - `stop_times.csv` which lists a stop id, a line id and a timestamp in the format of HH:MM:SS . For simplicity this timestamp is both departure and arrival time at a stop delays.csv which lists a line name and a delay in minutes. This data is static for now and assumed to be valid for any time of the day
 
-# Task
+## Task
 
 Write a service exposing an API that provides the following endpoints:
 
@@ -26,12 +26,55 @@ Write a service exposing an API that provides the following endpoints:
 
 The service should run on port `8081`
 
-# Getting start
+# Solution
+
+## Notes
+
+For brevity reasons, following decisions have been made while most production ready alternatives have been listed down as well.
+
+- CSVs are being used as persistence layer, while in production this must be replace with SQL/NoSQL layer to allow for better performance and data management
+- As far as the spec is concerned, nears stop wasn't required. However can be calculated just as easily using distance formula
+
+## Getting start
+
+### Run on Docker
+
+#### Prerequisites
+
+- Docker >= v17.3.1
 
 ```
-# run in dev mode
-docker-compose run --service-ports transport-app-dev
+# run dev container in background, remove -d to run in foreground
+docker-compose up -d transport-app-dev
 
-# run in prod mode
-docker-compose run --service-ports transport-app-prod
+# run prod container in background, remove -d to run in foreground
+docker-compose up -d transport-app-prod
+
+# stop container running in background
+docker-compose stop <name>
+```
+
+### Run locally
+
+#### Prerequisites
+
+- Node >= v8.x.x
+- Yarn >= v1.5.0 or NPM >= 5.x.x
+
+```
+# clone repo
+
+git clone https://github.com/sarmadsaleem/bcgdv-transport-app
+
+# install dependencies
+
+yarn
+
+# run app
+
+node app.js
+
+# run tests
+
+yarn test
 ```
