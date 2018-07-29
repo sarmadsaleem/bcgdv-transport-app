@@ -25,3 +25,13 @@ Write a service exposing an API that provides the following endpoints:
   - `GET` request answering the question of whether or not the given line is delayed at the moment
 
 The service should run on port `8081`
+
+# Getting start
+
+```
+# run in dev mode
+docker-compose run --service-ports transport-app-dev
+
+# run in prod mode
+docker-compose run --service-ports transport-app-prod
+```

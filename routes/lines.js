@@ -1,5 +1,5 @@
-const router = require('express').Router()
-const linesController = require('../controllers/linesController')
+const router = require('express').Router(),
+  linesController = require('../controllers/linesController')
 
 router.get('/lines', linesController.getLines)
 router.get('/lines/:linename', linesController.getDelays)
