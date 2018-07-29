@@ -37,19 +37,15 @@ docker-compose stop <name>
 
 ```
 # clone repo
-
 git clone https://github.com/sarmadsaleem/bcgdv-transport-app
 
 # install dependencies (replace with npm if required)
-
 yarn
 
 # run app
-
 node app.js
 
 # run tests
-
 yarn test
 ```
 
