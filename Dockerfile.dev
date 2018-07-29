@@ -1,0 +1,15 @@
+# Node LTS image apline
+FROM node:8.11.3-alpine
+
+# Set Node ENV
+ENV NODE_ENV=development
+RUN echo $NODE_ENV
+
+# Install nodemon for hotreloading
+RUN yarn global add nodemon
+
+# Set working directory
+WORKDIR /src
+
+CMD ["nodemon", "app.js"]
+EXPOSE 8081

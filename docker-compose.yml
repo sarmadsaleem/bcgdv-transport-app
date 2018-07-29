@@ -1,0 +1,16 @@
+version: '3'
+services:
+  transport-app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/src
+    ports:
+      - "8081:8081"
+  transport-app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "8081:8081"
