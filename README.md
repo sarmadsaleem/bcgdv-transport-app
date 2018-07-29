@@ -1,4 +1,4 @@
-## Problem
+# Problem
 
 In the fictional city of Verspaetung, public transport is notoriously unreliable. To tackle the problem, the city council has decided to make the public transport timetables and delay information public, opening up opportunities for innovative use cases.
 You are given the task to make use of that information and write an API that offers information on the public transport system of Verspaetung.
@@ -32,8 +32,8 @@ The service should run on port `8081`
 
 For brevity reasons, following decisions have been made while most production ready alternatives have been listed down as well.
 
-- CSVs are being used as persistence layer, while in production this must be replace with SQL/NoSQL layer to allow for better performance and data management
-- As far as the spec is concerned, nears stop wasn't required. However can be calculated just as easily using distance formula
+- CSVs are being used as persistence layer, while in production this must be replaced with SQL/NoSQL layer to allow for battle tested performance and data management
+- As far as the spec is concerned, nearest stop wasn't required. However can be calculated just as easily using distance formula
 
 ## Getting start
 
@@ -41,7 +41,7 @@ For brevity reasons, following decisions have been made while most production re
 
 #### Prerequisites
 
-- Docker >= v17.3.1
+- `Docker >= v17.3.1`
 
 ```
 # run dev container in background, remove -d to run in foreground
@@ -58,15 +58,15 @@ docker-compose stop <name>
 
 #### Prerequisites
 
-- Node >= v8.x.x
-- Yarn >= v1.5.0 or NPM >= 5.x.x
+- `Node >= v8.x.x`
+- `Yarn >= v1.5.0` or `NPM >= 5.x.x`
 
 ```
 # clone repo
 
 git clone https://github.com/sarmadsaleem/bcgdv-transport-app
 
-# install dependencies
+# install dependencies (replace with npm if required)
 
 yarn
 
@@ -78,3 +78,16 @@ node app.js
 
 yarn test
 ```
+
+### Tests
+
+- `/lines` endpoint - returns current lines at the requested position
+
+  - ✓ should return 200 for valid payload
+  - ✓ should return 404 when no matching line found
+  - ✓ should return 400 when validation fails
+
+- `/lines/:linename` endpoint - returns delays for given linename
+  - ✓ should return 200 for valid payload
+  - ✓ should return 404 when no delay are found
+  - ✓ should return 400 when validation fails
