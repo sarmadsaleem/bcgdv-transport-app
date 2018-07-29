@@ -74,3 +74,51 @@ describe('/lines endpoint - returns current lines at the requested position', ()
     expect(res.body).to.deep.equal(expectedOutput)
   })
 })
+
+// BDD test for /lines/:linename
+describe('/lines/:linename endpoint - returns delays for given linename', () => {
+  it('should return 200 for valid payload', async () => {
+    const linename = 'M4'
+    const endpoint = `/api/v1/lines/${linename}`
+
+    const expectedOutput = [
+      {
+        line_name: 'M4',
+        delay: '1'
+      }
+    ]
+
+    const res = await chai.request(server).get(endpoint)
+
+    expect(res).to.have.status(200)
+    expect(res.body).to.be.a('array')
+    expect(res.body).to.be.lengthOf(1)
+    expect(res.body).to.deep.equal(expectedOutput)
+  })
+
+  it('should return 404 when no delay are found', async () => {
+    const linename = 'M5'
+    const endpoint = `/api/v1/lines/${linename}`
+
+    const expectedOutput = { info: [`No delays found for ${linename}`] }
+
+    const res = await chai.request(server).get(endpoint)
+
+    expect(res).to.have.status(404)
+    expect(res.body).to.be.a('object')
+    expect(res.body).to.deep.equal(expectedOutput)
+  })
+
+  it('should return 400 when validation fails', async () => {
+    const linename = 'M5$!@#$%^&*()))_+'
+    const endpoint = `/api/v1/lines/${linename}`
+
+    const expectedOutput = { errors: ['Bad request, validation failed'] }
+
+    const res = await chai.request(server).get(endpoint)
+
+    expect(res).to.have.status(400)
+    expect(res.body).to.be.a('object')
+    expect(res.body).to.deep.equal(expectedOutput)
+  })
+})
