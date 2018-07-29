@@ -1,6 +1,8 @@
 const moment = require('moment'),
   linesModel = require('../models/lines')
 
+console.log(linesModel)
+
 // validators
 const isValidTime = time => moment(time, 'HH:mm:ss', true).isValid()
 const isValidCordinate = cordinate => !isNaN(cordinate)
@@ -18,7 +20,7 @@ exports.getLines = async (req, res, next) => {
   }
   // safe to proceed with execution
   else {
-    const result = await lineModel.getLines(timestamp, cordinates)
+    const result = await linesModel.lines(timestamp, cordinates)
     result.length
       ? res.status(200).json(result)
       : res.status(404).json({ info: ['No lines found'] })
@@ -37,7 +39,7 @@ exports.getDelays = async (req, res, next) => {
   }
   // safe to proceed with execution
   else {
-    const result = await lineModel.getDelays(linename)
+    const result = await linesModel.getDelays(linename)
     result.length
       ? res.status(200).json(result)
       : res.status(404).json({ info: [`No delays found for ${linename}`] })

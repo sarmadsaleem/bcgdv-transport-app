@@ -1,22 +1,22 @@
 const csv = require('csvtojson')
 
 const getLines = async lineId => {
-  const lines = await csv().fromFile('./data/lines.csv')
+  const lines = await csv().fromFile('models/data/lines.csv')
   return lines.filter(l => l.line_id === lineId)
 }
 
 const getStops = async cordinates => {
-  const stops = await csv().fromFile('./data/stops.csv')
+  const stops = await csv().fromFile('models/data/stops.csv')
   return stops.filter(stop => stop.x === cordinates.x && stop.y === cordinates.y)
 }
 
 const getStopTimes = async (stopId, time) => {
-  const stopTimes = await csv().fromFile('./data/stop_times.csv')
+  const stopTimes = await csv().fromFile('models/data/stop_times.csv')
   return stopTimes.filter(stopTime => stopTime.stop_id === stopId && stopTime.time === time)
 }
 
 const getDelays = async lineName => {
-  const delays = await csv().fromFile('./data/delays.csv')
+  const delays = await csv().fromFile('models/data/delays.csv')
   return delays.filter(delay => delay.line_name === lineName)
 }
 

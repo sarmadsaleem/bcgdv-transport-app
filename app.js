@@ -5,16 +5,22 @@ const express = require('express'),
   helmet = require('helmet')
 
 const isProduction = process.env.NODE_ENV === 'production'
+const isTesting = process.env.NODE_ENV === 'test'
 const app = express()
 
 // apply middleware
 app.use(cors())
 app.use(helmet())
-app.use(morgan('combined'))
 
 // use errorhandler only in non-production mode
 if (!isProduction) {
   app.use(errorhandler())
+}
+
+// use morgan combined logs in non-testing mode
+console.log({ isTesting })
+if (!isTesting) {
+  app.use(morgan('combined'))
 }
 
 // require routes
@@ -60,3 +66,6 @@ app.use((err, req, res, next) => {
 const server = app.listen(process.env.PORT || 8081, function() {
   console.log('Listening on port ' + server.address().port)
 })
+
+// for testing
+module.exports = app
