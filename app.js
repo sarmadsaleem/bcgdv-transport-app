@@ -18,7 +18,6 @@ if (!isProduction) {
 }
 
 // use morgan combined logs in non-testing mode
-console.log({ isTesting })
 if (!isTesting) {
   app.use(morgan('combined'))
 }

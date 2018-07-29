@@ -1,8 +1,6 @@
 const moment = require('moment'),
   linesModel = require('../models/lines')
 
-console.log(linesModel)
-
 // validators
 const isValidTime = time => moment(time, 'HH:mm:ss', true).isValid()
 const isValidCordinate = cordinate => !isNaN(cordinate)
